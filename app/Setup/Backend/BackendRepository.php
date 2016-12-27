@@ -50,7 +50,8 @@ class BackendRepository implements BackendRepositoryInterface
             for($c=1; $c <= $count; $c++ ){
                 $paramObj                = new FrontEnd();
                 $paramObj->backend_id    = $backend_id;
-                $paramObj->activation_key= uniqid();
+                $generateActivationKey= uniqid();
+                $paramObj->activation_key= md5($generateActivationKey);
                 $paramObj->description   = $des;
                 $paramObj->status        = $status;
 
