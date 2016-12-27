@@ -50,7 +50,9 @@ class BackendController extends Controller
         $site_url               			= Input::get('website_url');
         $client_count                       = Input::get('client_count');
         $url 								= substr($site_url,4,-4);
-        $activation_key						= $url.uniqid();
+        $generateActivationKey              = uniqid();
+        $activation_key	                    = md5($generateActivationKey);
+
         $description                        = Input::get('description');
         $status                             = Input::get('status');
         $paramObj               			= new Backend();
