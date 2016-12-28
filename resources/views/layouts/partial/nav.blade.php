@@ -7,17 +7,18 @@
             <!-- begin sidebar minify button -->
             <li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
             <!-- end sidebar minify button -->
-            <li class="nav-header">AcePlus Reports</li>
+            <li class="nav-header">AcePlus Logs</li>
             <li nav-id='report'  class="has-sub" >
                 <a href="javascript:;">
                     <b class="caret pull-right"></b>
                     <i class="fa fa-calendar"></i>
-                    <span>Sale Reports</span>
+                    <span>Logs</span>
                 </a>
 
                 <ul class="sub-menu">
-                    <li nav-id="report-sale-summary"><a href="#">Sale Summary</a></li>
-                    <li nav-id="report-sale-detail"><a href="#">Sale Detail)</a></li>
+                    <li nav-id="report-sale-summary"><a href="/log/backend">Backend Server Log</a></li>
+                    <li nav-id="report-sale-summary"><a href="/log/frontend">Frontend Client Log</a></li>
+                    <li nav-id="report-sale-summary"><a href="/log/activation">Activation Log</a></li>
                 </ul>
             </li>
 
@@ -38,7 +39,7 @@
                         </a>
 
                         <ul class="sub-menu">
-                            <li nav-id="modifier-manage-modifier"><a href="role/create">Entry</a></li>
+                            <li nav-id="modifier-manage-modifier"><a href="/role/create">Entry</a></li>
                             <li nav-id="modifier-manage-modifierpanel"><a href="/role">List</a></li>
                         </ul>
                     </li>
@@ -87,7 +88,7 @@
                             <span>Backend Server</span>
                         </a>
                         <ul class="sub-menu">
-                            <li nav-id="modifier-manage-modifier"><a href="backend/create">Entry</a></li>
+                            <li nav-id="modifier-manage-modifier"><a href="/backend/create">Entry</a></li>
                             <li nav-id="modifier-manage-modifierpanel"><a href="/backend">List</a></li>
                         </ul>
                     </li>

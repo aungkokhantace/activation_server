@@ -67,8 +67,15 @@ Route::group(['middleware' => 'web'], function () {
 
         //FrontEnd
         Route::get('frontend',array('as'=>'frontend','uses'=>'FrontEndController@index'));
-               
+
+        //Log Reports
+        Route::get('log/backend',array('as'=>'log/backend','uses'=>'LogController@backend'));
+        Route::get('log/frontend',array('as'=>'log/frontend','uses'=>'LogController@frontend'));
+        Route::get('log/activation',array('as'=>'log/activation','uses'=>'LogController@activation'));
     });
+
+
+
 });
 
 
