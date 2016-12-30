@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Setup\FrontEnd\FrontEndRepository;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -38,7 +39,10 @@ class BackendController extends Controller
     public function create()
     {
     	if (Auth::guard('User')->check()) {
-            return view('backend.backend');
+            $frontends = array();
+            return view('backend.backend')
+                ->with('action', 'create')
+                ->with('frontends', $frontends);
         }
         return redirect('/');
     }
@@ -76,11 +80,30 @@ class BackendController extends Controller
 
     public function edit($id)
     {
-         if (Auth::guard('User')->check()) {
-            $backend = Backend::find($id);
-            return view('backend.backend')->with('backend', $backend);
+        try {
+             if (Auth::guard('User')->check()) {
+                 $backend = Backend::find($id);
+                 if(isset($backend) && count($backend)>0){
+
+                     $frontendRepo = new FrontEndRepository();
+                     $frontends = $frontendRepo->getFrontEndByBackendId($id);
+
+                     return view('backend.backend')
+                         ->with('frontends', $frontends)
+                         ->with('action', 'edit')
+                         ->with('backend', $backend);
+                 }
+                 else{
+                     return redirect('/errors/417');
+                 }
+
+
+            }
+            return redirect('/');
         }
-        return redirect('/');
+        catch(Exception $e){
+            return redirect('/errors/417');
+        }
     }
 
     public function update(BackendEditRequest $request)

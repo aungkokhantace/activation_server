@@ -10,5 +10,7 @@ namespace App\Setup\FrontEnd;
 interface FrontEndRepositoryInterface
 {
     public function getFrontEnd();
-     
+    public function getFrontEndByBackendId($backendId);
+    public function update($paramObj);
+
 }

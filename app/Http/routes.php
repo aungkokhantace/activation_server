@@ -67,6 +67,9 @@ Route::group(['middleware' => 'web'], function () {
 
         //FrontEnd
         Route::get('frontend',array('as'=>'frontend','uses'=>'FrontEndController@index'));
+        Route::post('frontend/updatestatus',array('as'=>'frontend/updatestatus','uses'=>'FrontEndController@updatestatus'));
+        Route::get('frontend/edit/{id}',array('as'=>'frontend/edit','uses'=>'FrontEndController@edit'));
+        Route::post('frontend/update',array('as'=>'frontend/update','uses'=>'FrontEndController@update'));
 
         //Log Reports
         Route::get('log/backend',array('as'=>'log/backend','uses'=>'LogController@backend'));
