@@ -46,15 +46,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('permission/store', array('as'=>'permission/store','uses'=>'Core\PermissionController@store'));
         Route::get('permission/edit/{id}', array('as'=>'permission/edit','uses'=>'Core\PermissionController@edit'));
         Route::post('permission/update', array('as'=>'permission/update','uses'=>'Core\PermissionController@update'));
-        Route::post('permission/destroy', array('as'=>'permission/destroy','uses'=>'Core\PermissionController@destroy'));
-
-        //Customer
-        Route::get('customer',array('as'=>'customer','uses'=>'CustomerController@index'));
-        Route::get('customer/create',array('as'=>'customer/create','uses'=>'CustomerController@create'));
-        Route::post('customer/store',array('as'=>'customer/store','uses'=>'CustomerController@store'));
-        Route::get('customer/edit/{id}',array('as'=>'customer/edit','uses'=>'CustomerController@edit'));
-        Route::post('customer/update',array('as'=>'customer/update','uses'=>'CustomerController@update'));
-        Route::post('customer/destroy',array('as'=>'customer/destroy','uses'=>'CustomerController@destroy'));
+        Route::post('permission/destroy', array('as'=>'permission/destroy','uses'=>'Core\PermissionController@destroy'));        
 
         //Backend Activation
         Route::get('backend',array('as'=>'backend','uses'=>'BackendController@index'));
