@@ -83,12 +83,4 @@ class Utility
 
         }
     }
-    public static function username(){
-        $username = 'admin';
-        return $username;
-    }
-    public static function password(){
-        $password = '12345678';
-        return $password;
-    }
 }
