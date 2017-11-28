@@ -21,6 +21,10 @@ use Illuminate\Support\Facades\Lang;
 use App\Session;
 use App\Core\Check;
 use App\Core\Redirect\AceplusRedirect;
+use Illuminate\Http\Request;
+use App\Setup\LoginUserLog\LoginUserLog;
+use Carbon\Carbon;
+use App\Core\Utility;
 
 class AuthController extends Controller
 {
@@ -87,17 +91,31 @@ class AuthController extends Controller
         ]);
     }
 
-    public function showLogin()
-    {
+    public function show_first_login(){
         if(!$this->validSession) {
            
-            return view('auth.login');
+            return view('auth.first_login.first_login');
         }
         $jeriRedirect = new AceplusRedirect();
         return $jeriRedirect->firstRedirect();
     }
+    public function showLogin()
+    {
+        if(Auth::guard('User')->check()){
+        if(!$this->validSession) {
+           
+            return view('auth.login');
+        }
 
-    public function doLogin(LoginFormRequest $request){
+        $jeriRedirect = new AceplusRedirect();
+        return $jeriRedirect->firstRedirect();
+    }
+    else{
+        return redirect('/');
+    }
+    }
+
+    public function dofirstLogin(LoginFormRequest $request){
         $request->validate();
             $validation = Auth::guard('User')->attempt([
             'user_name'=>$request->user_name,
@@ -108,9 +126,37 @@ class AuthController extends Controller
             return redirect()->back()->withErrors($this->getFailedLoginMessage());
         }
         else{
+            
+
+            return redirect('/login');
+        }
+    }
+
+    public function doLogin(LoginFormRequest $request){
+        $request->validate();
+            $validation = Auth::guard('User')->attempt([
+            'user_name'=>$request->user_name,
+            'password'=>$request->password,
+            'role_id' =>1
+        ]);
+
+        if(!$validation){
+            return redirect()->back()->withErrors($this->getFailedLoginMessage());
+        }
+        else{
 
             $id = Auth::guard('User')->id();
             Check::createSession($id);
+
+            $ip = $request->ip();
+            $time = Carbon::now();
+
+            $loginuserlogObj = new LoginUserLog();
+            $loginuserlogObj->ip_address = $ip;
+            $loginuserlogObj->time = $time;
+
+            $log = Utility::addCreatedBy($loginuserlogObj);
+            $log->save();
 
             return redirect('userAuth');
         }

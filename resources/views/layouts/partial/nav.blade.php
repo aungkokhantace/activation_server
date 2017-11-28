@@ -19,6 +19,7 @@
                     <li nav-id="report-sale-summary"><a href="/log/backend">Backend Server Log</a></li>
                     <li nav-id="report-sale-summary"><a href="/log/frontend">Frontend Client Log</a></li>
                     <li nav-id="report-sale-summary"><a href="/log/activation">Activation Log</a></li>
+                    <li nav-id="report-sale-summary"><a href="/log/loginuserlog">Login User Log</a></li>
                 </ul>
             </li>
 

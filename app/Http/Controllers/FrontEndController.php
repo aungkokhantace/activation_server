@@ -94,8 +94,9 @@ class FrontEndController extends Controller
         $paramObj               = FrontEnd::find($id);
         $paramObj->description  = $description;
         $paramObj->status       = $status;
-        $result = $this->backendRepository->update($paramObj);
-        echo "<pre>";print_r($result);exit();
+        // $backendRepository = new BackendRepository;
+        $result = $this->frontEndRepository->update($paramObj);
+        // echo "<pre>";print_r($result);exit();
 
 
         return redirect()->action('BackendController@index');

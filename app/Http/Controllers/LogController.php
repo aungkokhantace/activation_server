@@ -112,4 +112,14 @@ class LogController extends Controller
         return redirect('/');
     }
 
+    public function loginuserlog(){
+        if (Auth::guard('User')->check()) {
+            $logRepo = new LogRepository();
+            $loginuserlogs      = $logRepo->getloginuserlog();
+
+            return view('log.loginuserlog')->with('loginuserlogs', $loginuserlogs);
+        }
+        return redirect('/');
+    }
+
 }

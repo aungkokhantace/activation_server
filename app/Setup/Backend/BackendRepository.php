@@ -104,7 +104,7 @@ class BackendRepository implements BackendRepositoryInterface
 
             for($c=1; $c<=$count; $c++){
 
-                $paramObj = FrontEnd::where('backend_id','=',$id)->first();
+                $paramObj = FrontEnd::where('backend_id','=',$backend_id)->first();
                 $paramObj->description = $des;
                 $paramObj->status      = $status;
 

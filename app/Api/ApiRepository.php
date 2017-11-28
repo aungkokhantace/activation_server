@@ -34,7 +34,6 @@ class ApiRepository implements ApiRepositoryInterface
 
             // Server not found exception case
             if($frontEnd == null || count($frontEnd) == 0){
-
                 $paramObj = new FrontendClientLog();
                 $paramObj->tablet_id = $tablet_id;
                 $paramObj->tablet_activation_key = $tablet_activation_key;
@@ -99,6 +98,7 @@ class ApiRepository implements ApiRepositoryInterface
 
                 }
                 else {
+
                     $param = new FrontendClient();
                     $param->backend_id = $backend_id;
                     $param->front_end_id = $frontend_id;
@@ -154,7 +154,6 @@ class ApiRepository implements ApiRepositoryInterface
 
             // Server not found exception case
             if($frontEnd == null || count($frontEnd) == 0){
-
                 $paramObj = new FrontendClientLog();
                 $paramObj->tablet_id = $tablet_id;
                 $paramObj->tablet_activation_key = $tablet_activation_key;
@@ -175,7 +174,6 @@ class ApiRepository implements ApiRepositoryInterface
             {
                 // Frontend Client status is "inactive"
                 if($frontEnd->status == 'inactive'){
-
                     $paramObj = new FrontendClientLog();
                     $paramObj->tablet_id = $tablet_id;
                     $paramObj->tablet_activation_key = $tablet_activation_key;
@@ -201,7 +199,6 @@ class ApiRepository implements ApiRepositoryInterface
                 $existingFrontendClient          = FrontendClient::where('front_end_id','=',$frontend_id)->where('backend_id','=',$backend_id)->where('tablet_id','=',$tablet_id)->first();
 
                 if(isset($existingFrontendClient)){
-
                     $paramObj = new FrontendClientLog();
                     $paramObj->tablet_id = $tablet_id;
                     $paramObj->tablet_activation_key = $tablet_activation_key;

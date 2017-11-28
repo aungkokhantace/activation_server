@@ -40,7 +40,7 @@ class ApiController extends Controller
                 // $returnedObj['tabletId']                = $result['tablet_id'];
                 $returnedObj['backend_activation_key']  = $result['backend_activation_key'];
                 $returnedObj['backend_url']             = $result['backend_url'];
-
+                
                 return \Response::json($returnedObj);
              }    
             else{

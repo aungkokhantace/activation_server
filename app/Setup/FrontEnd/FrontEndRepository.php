@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use App\Setup\FrontEnd\FrontEnd;
 use App\Core\Utility;
+use App\Core\ReturnMessage;
 
 class FrontEndRepository implements FrontEndRepositoryInterface
 {

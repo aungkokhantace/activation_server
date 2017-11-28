@@ -1,7 +1,9 @@
 <?php
 Route::group(['middleware' => 'web'], function () {
 
-    Route::get('/', 'Auth\AuthController@showLogin');
+    Route::get('/', 'Auth\AuthController@show_first_login');
+    Route::post('first_login', 'Auth\AuthController@dofirstLogin');
+    // Route::get('/', 'Auth\AuthController@showLogin');
     Route::get('login', array('as'=>'login','uses'=>'Auth\AuthController@showLogin'));
     Route::post('login', array('as'=>'login','uses'=>'Auth\AuthController@doLogin'));
     Route::get('logout', array('as'=>'logout','uses'=>'Auth\AuthController@doLogout'));
@@ -67,6 +69,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('log/backend',array('as'=>'log/backend','uses'=>'LogController@backend'));
         Route::get('log/frontend',array('as'=>'log/frontend','uses'=>'LogController@frontend'));
         Route::get('log/activation',array('as'=>'log/activation','uses'=>'LogController@activation'));
+        Route::get('log/loginuserlog',array('as'=>'log/loginuserlog','uses'=>'LogController@loginuserlog'));
     });
 
 

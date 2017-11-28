@@ -19,6 +19,12 @@ use App\Log\LogRepositoryInterface;
 
 class LogRepository implements LogRepositoryInterface
 {
+
+    public function getloginuserlog(){
+        $loginuserlog = DB::select("SELECT * FROM login_user_log");
+        return $loginuserlog;
+    }
+
     public function getBackend()
     {
         //$backend = DB::select("SELECT * FROM backend_server WHERE deleted_at IS NULL");
