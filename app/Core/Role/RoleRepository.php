@@ -18,7 +18,7 @@ class RoleRepository implements RoleRepositoryInterface
 {
     public function getRoles()
     {
-        $roles = Role::whereNull('deleted_at')->get();
+        $roles = Role::whereNotIn('id',[9999])->whereNull('deleted_at')->get();
         return $roles;
     }
 
