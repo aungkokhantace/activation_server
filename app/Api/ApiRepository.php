@@ -52,8 +52,26 @@ class ApiRepository implements ApiRepositoryInterface
 
             else
             {
-                // Frontend Client status is "inactive"
-                if($frontEnd->status == 'inactive'){
+                
+                //Backend server is inactive
+                if($frontEnd->backend->status == 0){
+                    $paramObj = new FrontendClientLog();
+                    $paramObj->tablet_id = $tablet_id;
+                    $paramObj->tablet_activation_key = $tablet_activation_key;
+                    $paramObj->description = "Backend server is inactive !!!";
+                    $paramObj->status = "fail";
+
+                    $temp = Utility::addCreatedBy($paramObj);
+                    $temp->save();
+
+                    $returnedObj['aceplusStatusCode'] = ReturnMessage::INTERNAL_SERVER_ERROR;
+                    $returnedObj['aceplusStatusMessage'] = "Backend server is inactive !!!";
+                    $returnedObj['backend_activation_key']  = $tablet_activation_key;
+                    $returnedObj['backend_url'] = "";
+                    return $returnedObj;
+                }else{
+                    // Frontend Client status is "inactive"
+                if($frontEnd->status == 0){
 
                     $paramObj = new FrontendClientLog();
                     $paramObj->tablet_id = $tablet_id;
@@ -70,6 +88,7 @@ class ApiRepository implements ApiRepositoryInterface
                     $returnedObj['backend_url'] = "";
                     return $returnedObj;
 
+                    }
                 }
 
                 DB::beginTransaction();
@@ -81,20 +100,27 @@ class ApiRepository implements ApiRepositoryInterface
 
                 if(isset($existingFrontendClient)){
 
-                    $tempObj                = Utility::addUpdatedBy($existingFrontendClient);
-                    $tempObj->tablet_id     = $tablet_id;
-                    $tempObj->save();
+                    // $tempObj                = Utility::addUpdatedBy($existingFrontendClient);
+                    // $tempObj->tablet_id     = $tablet_id;
+                    // $tempObj->save();
 
                     $paramObj = new FrontendClientLog();
-                    $paramObj->description = "activeated !!!!";
+                    $paramObj->description = "Key is already used";
                     $paramObj->front_end_id = $existingFrontendClient->id;
                     $paramObj->backend_id = $backend_id;
                     $paramObj->tablet_id = $tablet_id;
                     $paramObj->tablet_activation_key = $tablet_activation_key;
-                    $paramObj->status = "pass";
+                    $paramObj->status = "fail";
 
                     $temp = Utility::addCreatedBy($paramObj);
                     $temp->save();
+
+                    DB::commit();
+                    $returnedObj['aceplusStatusCode'] = ReturnMessage::INTERNAL_SERVER_ERROR;
+                    $returnedObj['aceplusStatusMessage'] = "Your requested frontend client key is already used !!!";
+                    $returnedObj['backend_activation_key']  = $backend_ActivationKey->backend_activationkey;;
+                    $returnedObj['backend_url'] = "$backend_ActivationKey->website_url;";
+                    return $returnedObj;
 
                 }
                 else {
@@ -172,8 +198,26 @@ class ApiRepository implements ApiRepositoryInterface
 
             else
             {
-                // Frontend Client status is "inactive"
-                if($frontEnd->status == 'inactive'){
+                //Backend server is inactive
+                if($frontEnd->backend->status == 0){
+                    $paramObj = new FrontendClientLog();
+                    $paramObj->tablet_id = $tablet_id;
+                    $paramObj->tablet_activation_key = $tablet_activation_key;
+                    $paramObj->description = "Backend server is inactive !!!";
+                    $paramObj->status = "fail";
+
+                    $temp = Utility::addCreatedBy($paramObj);
+                    $temp->save();
+
+                    $returnedObj['aceplusStatusCode'] = ReturnMessage::INTERNAL_SERVER_ERROR;
+                    $returnedObj['aceplusStatusMessage'] = "Backend server is inactive !!!";
+                    $returnedObj['backend_activation_key']  = $tablet_activation_key;
+                    $returnedObj['backend_url'] = "";
+                    return $returnedObj;
+                }else{
+                    // Frontend Client status is "inactive"
+                if($frontEnd->status == 0){
+
                     $paramObj = new FrontendClientLog();
                     $paramObj->tablet_id = $tablet_id;
                     $paramObj->tablet_activation_key = $tablet_activation_key;
@@ -189,6 +233,7 @@ class ApiRepository implements ApiRepositoryInterface
                     $returnedObj['backend_url'] = "";
                     return $returnedObj;
 
+                    }
                 }
 
                 DB::beginTransaction();
@@ -199,19 +244,36 @@ class ApiRepository implements ApiRepositoryInterface
                 $existingFrontendClient          = FrontendClient::where('front_end_id','=',$frontend_id)->where('backend_id','=',$backend_id)->where('tablet_id','=',$tablet_id)->first();
 
                 if(isset($existingFrontendClient)){
+                    // $paramObj = new FrontendClientLog();
+                    // $paramObj->tablet_id = $tablet_id;
+                    // $paramObj->tablet_activation_key = $tablet_activation_key;
+                    // $paramObj->description = "checking frontend activation key - pass";
+                    // $paramObj->status = "pass";
+
+                    // $temp = Utility::addCreatedBy($paramObj);
+                    // $temp->save();
+
+                    // $returnedObj['aceplusStatusCode'] = ReturnMessage::OK;
+                    // $returnedObj['aceplusStatusMessage'] = "Your requested frontend client is ACTIVE.";
+                    // $returnedObj['backend_activation_key']  = $tablet_activation_key;
+                    // $returnedObj['backend_url'] = "";
+                    // return $returnedObj;
+
                     $paramObj = new FrontendClientLog();
+                    $paramObj->description = "Key is already used";
+                    // $paramObj->front_end_id = $existingFrontendClient->id;
+                    // $paramObj->backend_id = $backend_id;
                     $paramObj->tablet_id = $tablet_id;
                     $paramObj->tablet_activation_key = $tablet_activation_key;
-                    $paramObj->description = "checking frontend activation key - pass";
-                    $paramObj->status = "pass";
+                    $paramObj->status = "fail";
 
                     $temp = Utility::addCreatedBy($paramObj);
                     $temp->save();
-
-                    $returnedObj['aceplusStatusCode'] = ReturnMessage::OK;
-                    $returnedObj['aceplusStatusMessage'] = "Your requested frontend client is ACTIVE.";
-                    $returnedObj['backend_activation_key']  = $tablet_activation_key;
-                    $returnedObj['backend_url'] = "";
+                    
+                    $returnedObj['aceplusStatusCode'] = ReturnMessage::INTERNAL_SERVER_ERROR;
+                    $returnedObj['aceplusStatusMessage'] = "Your requested frontend client key is already used !!!";
+                    $returnedObj['backend_activation_key']  = $backend_ActivationKey->backend_activationkey;;
+                    $returnedObj['backend_url'] = "$backend_ActivationKey->website_url;";
                     return $returnedObj;
 
                 }

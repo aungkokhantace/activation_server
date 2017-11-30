@@ -16,6 +16,9 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('password/email', ['as' => 'auth.password.email', 'uses' => 'Auth\PasswordController@sendResetLinkEmail']);
     Route::post('password/reset', ['as' => 'auth.password.reset', 'uses' => 'Auth\PasswordController@reset']);
 
+    Route::get('systemreference', array('as'=>'systemreference',
+            'uses'=>'SystemReferenceController@index'));
+
     Route::group(['middleware' => 'right'], function () {
 
         // Site Configuration
@@ -64,6 +67,9 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('frontend/updatestatus',array('as'=>'frontend/updatestatus','uses'=>'FrontEndController@updatestatus'));
         Route::get('frontend/edit/{id}',array('as'=>'frontend/edit','uses'=>'FrontEndController@edit'));
         Route::post('frontend/update',array('as'=>'frontend/update','uses'=>'FrontEndController@update'));
+
+        //FrontEnd Client
+        Route::get('frontend_client',array('as'=>'frontend_client','uses'=>'FrontEndController@frontend_client'));
 
         //Log Reports
         Route::get('log/backend',array('as'=>'log/backend','uses'=>'LogController@backend'));

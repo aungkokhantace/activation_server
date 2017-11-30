@@ -97,28 +97,29 @@ class BackendRepository implements BackendRepositoryInterface
             //Save Backend Server Log
             $backend_log = new BackendLog();
             $backend_log->backend_id = $backend_id;
-            $backend_log->description ="created";
+            $backend_log->description ="updated";
 
             $log = Utility::addCreatedBy($backend_log);
             $log->save();
 
             for($c=1; $c<=$count; $c++){
 
-                $paramObj = FrontEnd::where('backend_id','=',$backend_id)->first();
-                $paramObj->description = $des;
-                $paramObj->status      = $status;
+                // $paramObj = FrontEnd::where('backend_id','=',$backend_id)->first();
+                // dd($paramObj);
+                // $paramObj->description = $des;
+                // $paramObj->status      = $status;
 
-                $tempObj = Utility::addUpdatedBy($paramObj);
-                $tempObj->save();
+                // $tempObj = Utility::addUpdatedBy($paramObj);
+                // $tempObj->save();
 
                 //Save Front End Server Log
-                $id = $paramObj->id;
-                $fronted_log = new FrontEndLog();
-                $fronted_log->front_end_id = $id;
-                $fronted_log->description = "created";
+                // $id = $paramObj->id;
+                // $fronted_log = new FrontEndLog();
+                // $fronted_log->front_end_id = $id;
+                // $fronted_log->description = "updated";
 
-                $log = Utility::addCreatedBy($fronted_log);
-                $log->save();
+                // $log = Utility::addCreatedBy($fronted_log);
+                // $log->save();
             }
 
             $returnedObj['aceplusStatusCode'] = ReturnMessage::OK;

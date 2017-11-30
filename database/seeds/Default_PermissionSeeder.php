@@ -74,6 +74,7 @@ class Default_PermissionSeeder extends Seeder
             ['id'=>43,'module'=>'Frontend','name'=>'Edit','description'=>'Edit Frontend','url'=>'frontend/edit'],
 
             ['id'=>44,'module'=>'Backend','name'=>'Log','description'=>'Login User Log','url'=>'log/loginuserlog'],
+            ['id'=>45,'module'=>'Frontend Client','name'=>'Listing','description'=>'Frontend Client','url'=>'frontend_client'],
 
         );
 

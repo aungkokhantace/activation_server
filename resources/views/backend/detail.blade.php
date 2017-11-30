@@ -52,7 +52,7 @@
         </div>
     </div>
 
-    {!! Form::open(array('url' => 'backend/detail/update', 'class'=> 'form-horizontal user-form-border')) !!}
+    {!! Form::open(array('url' => 'backend/detail/update', 'class'=> 'form-horizontal user-form-border','id'=>'frm_backend')) !!}
 
         <input type="hidden" name="id" value="{{$backend->id}}"/>
         <br/>
@@ -65,7 +65,7 @@
                 </select>
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                <input type="submit" name="submit" value="Adding New Client" class="form-control btn-primary">
+                <input type="button" value="Adding New Client" class="form-control btn-primary" onclick="add_client_confirm_setup('backend')">
             </div>
             
         </div>

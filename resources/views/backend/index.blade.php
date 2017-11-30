@@ -67,7 +67,11 @@
                             <td>{{$backend->description}}</td>
                             <td>{{$backend->client_count}}</td>
                             <td>{{$backend->backend_activationkey}}</td>
-                            <td>{{$backend->status}}</td>
+                            @if($backend->status == 0)
+                            <td>inactive</td>
+                            @else
+                            <td>active</td>
+                            @endif
                             <td><a href="/backend/detail/{{$backend->id}}">Detail</a></td>
                             <td><a href="/backend/edit/{{$backend->id}}">Edit</a></td>
                         </tr>

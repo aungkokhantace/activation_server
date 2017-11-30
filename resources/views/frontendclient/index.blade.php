@@ -1,15 +1,11 @@
 @extends('layouts.master')
-@section('title','Frontend Client Logs')
+@section('title','Frontend Client')
 @section('content')
 
         <!-- begin #content -->
 <div id="content" class="content">
 
-    <h1 class="page-header">Frontend Client Logs</h1>
-
-    {!! Form::open(array('id'=> 'frm_frontend_server_log' ,'url' => 'log/frontend', 'class'=> 'form-horizontal user-form-border')) !!}
-    {{ csrf_field() }}
-    <input type="hidden" id="selected_checkboxes" name="selected_checkboxes" value="">
+    <h1 class="page-header">Frontend Clients Activation List</h1>
 
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -19,30 +15,30 @@
 
                     <thead>
                     <tr>
-                        <th>WebSite URL</th>
-                        <th>Frontend Activation Key</th>
-                        <th>Total Access Count</th>
-                        <th>Status</th>
+                        <th>Backend Server</th>
+                        <th>Tablet Activation Key</th>
+                        <th>Tablet ID</th>
                         <th>Description</th>
+                        <th>Start Date</th>
                     </tr>
                     </thead>
                     <tfoot>
                     <tr>
-                        <th class="search-col" con-id="website_url">WebSite URL</th>
-                        <th class="search-col" con-id="activation_key">Front Activation Key</th>
-                        <th class="search-col" con-id="access_total_count">Total Access Count</th>
-                        <th class="search-col" con-id="status">Status</th>
+                        <th class="search-col" con-id="tablet_activation_key">Backend Server</th>
+                        <th class="search-col" con-id="access_total_count">Tablet Activation Key</th>
+                        <th class="search-col" con-id="status">Tablet ID</th>
                         <th class="search-col" con-id="description">Description</th>
+                        <th class="search-col" con-id="created_by">Start Date</th>
                     </tr>
                     </tfoot>
                     <tbody>
-                    @foreach($frontends as $frontend)
+                    @foreach($frontendClients as $frontendClient)
                         <tr>
-                            <td>{{$frontend->website_url}}</td>
-                            <td>{{$frontend->activation_key}}</td>
-                            <td>{{$frontend->access_total_count}}</td>
-                            <td>{{$frontend->status}}</td>
-                            <td>{{$frontend->description}}</td>
+                            <td>{{$frontendClient->backend->website_url}}</td>
+                            <td>{{$frontendClient->tablet_activation_key}}</td>
+                            <td>{{$frontendClient->tablet_id}}</td>
+                            <td>{{$frontendClient->description}}</td>
+                            <td>{{$frontendClient->start_date}}</td>
                         </tr>
                     @endforeach
                     </tbody>

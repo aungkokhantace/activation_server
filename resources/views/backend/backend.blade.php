@@ -8,12 +8,12 @@
     <h1 class="page-header">{{isset($backend) ?  'Backend Server Edit' : 'Backend Server Entry' }}</h1>
 
     @if(isset($backend))
-        {!! Form::open(array('url' => 'backend/update', 'class'=> 'form-horizontal user-form-border')) !!}
+        {!! Form::open(array('url' => 'backend/update', 'class'=> 'form-horizontal user-form-border', 'id'=> 'backend_server')) !!}
 
     @else
-        {!! Form::open(array('url' => 'backend/store', 'class'=> 'form-horizontal user-form-border')) !!}
+        {!! Form::open(array('url' => 'backend/store', 'class'=> 'form-horizontal user-form-border', 'id'=> 'backend_server')) !!}
     @endif
-    <input type="hidden" name="id" value="{{isset($backend)? $backend->id:''}}"/>
+    <input type="hidden" name="id" id="id" value="{{isset($backend)? $backend->id:''}}"/>
     <br/>
 
     <div class="row">
@@ -70,16 +70,16 @@
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-2">
             <select name="status" class="form-control">
                 @if(isset($backend))
-                    @if($backend->status == "active")
-                        <option value="active" selected>active</option>
-                        <option value="inactive">inactive</option>
+                    @if($backend->status == "1")
+                        <option value="1" selected>active</option>
+                        <option value="0">inactive</option>
                     @else
-                        <option value="inactive" selected>inactive</option>
-                        <option value="active">active</option>
+                        <option value="0" selected>inactive</option>
+                        <option value="1">active</option>
                     @endif
                 @else
-                    <option value="active">active</option>
-                    <option value="inactive">inactive</option>
+                    <option value="1">active</option>
+                    <option value="0">inactive</option>
                 @endif
             </select>
             <p class="text-danger">{{$errors->first('description')}}</p>
@@ -90,7 +90,7 @@
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
         </div>
         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-            <input type="submit" name="submit" value="{{isset($backend)? 'UPDATE' : 'ADD'}}" class="form-control btn-primary">
+            <input type="button"  value="{{isset($backend)? 'UPDATE' : 'ADD'}}" class="form-control btn-primary" onclick="submit_confirm('backend_server')">
         </div>
         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
             <input type="button" value="CANCEL" class="form-control cancel_btn" onclick="cancel_setup('backend')">
@@ -132,7 +132,11 @@
                         <tr>
                             <td>{{$frontend->activation_key}}</td>
                             <td>{{$frontend->description}}</td>
-                            <td>{{$frontend->status}}</td>
+                            @if($frontend->status == 0)
+                            <td>inactive</td>
+                            @else
+                            <td>active</td>
+                            @endif
                             <td><a class="btn btn-primary" href="/frontend/edit/{{$frontend->id}}">Edit</a></td>
                             <td>
                                 <form id="frm_frontend_status_{{$frontend->id}}" method="post" action="/frontend/updatestatus">
@@ -141,7 +145,7 @@
                                     <input type="hidden" id="status" name="status"  value="{{$frontend->status}}">
                                     <input type="hidden" id="backend_id" name="backend_id"  value="{{$frontend->backend_id}}">
                                     <button type="button" onclick="frontend_update('{{$frontend->id}}','{{$frontend->status}}','{{$frontend->backend_id}}');" class="btn btn-primary">
-                                        @if($frontend->status == 'active')
+                                        @if($frontend->status == '1')
                                             INACTIVE
                                         @else
                                             ACTIVE
@@ -164,6 +168,13 @@
 @section('page_script')
     <script type="text/javascript" language="javascript" class="init">
         $(document).ready(function() {
+
+            $('#backend_server').validate({
+                 submitHandler: function(form) {
+                    $('input[type="submit"]').attr('disabled','disabled');
+                    form.submit();
+                }
+            }); 
 
             $('#list-table tfoot th.search-col').each( function () {
                 var title = $('#list-table thead th').eq( $(this).index() ).text();
@@ -222,5 +233,7 @@
                     });
 
         }
+        
+        
     </script>
 @stop

@@ -97,7 +97,7 @@
                     <li nav-id="modifier-manage" class="has-sub">
                         <a href="javascript:;">
                             <b class="caret pull-right"></b>
-                            <span>Frontend Client</span>
+                            <span>Frontend</span>
                         </a>
                         <ul class="sub-menu">
                             <li nav-id="modifier-manage-modifierpanel"><a href="/frontend">List</a></li>
@@ -105,7 +105,25 @@
                     </li>
                    
                 </ul>
+            </li>
+
+            <li  nav-id='modifier'  class="has-sub">
+                <a href="javascript:;">
+                    <b class="caret pull-right"></b>
+                    <i class="fa fa-users"></i>
+                    <span>Frontend Client</span>
+                </a>
+                <ul class="sub-menu">
+                    <li nav-id="modifier-manage-modifierpanel"><a href="/frontend_client">List</a></li>
+                </ul>
             </li>    
+
+             <li  nav-id='modifier'  class="has-sub">
+                <a href="/systemreference">
+                    <i class="fa fa-users"></i>
+                    <span>System Reference</span>
+                </a>
+            </li>          
 
         </ul>
         <!-- end sidebar nav -->

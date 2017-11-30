@@ -42,16 +42,17 @@ class FrontEndController extends Controller
             $inputAll = Input::all();
             $frontendId = $inputAll['frontend_id'];
             $status = $inputAll['status'];
+            // dd($status);
             $backendId = $inputAll['backend_id'];
 
-            if($status == 'active'){
-                $status = 'inactive';
+            if($status == 1){
+                $status = 0;
             }
-            else if($status == 'inactive'){
-                $status = 'active';
+            else if($status == 0){
+                $status = 1;
             }
             else{
-                $status = 'inactive';
+                $status = 0;
             }
 
             $this->frontEndRepository->updateStatus($frontendId,$status);
@@ -101,5 +102,14 @@ class FrontEndController extends Controller
 
         return redirect()->action('BackendController@index');
     }
+
+    public function frontend_client(Request $request)
+    {
+        if (Auth::guard('User')->check()) {
+            $frontendClients      = $this->frontEndRepository->getFrontEndClient();
+            return view('frontendclient.index')->with('frontendClients', $frontendClients);
+        }
+        return redirect('/');
+    }    
     
 }

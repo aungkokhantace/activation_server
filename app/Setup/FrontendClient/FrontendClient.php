@@ -19,5 +19,8 @@ class FrontendClient extends Model
         'status','description','start_date','end_date','created_at','updated_at','deleted_at','updated_by','created_by','deleted_by'
     ];
 
-    
+     public function backend(){
+    	return $this->belongsTo('App\Setup\Backend\Backend','backend_id','id');
+    }
+      
 }

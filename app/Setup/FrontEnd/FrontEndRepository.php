@@ -11,6 +11,8 @@ namespace App\Setup\FrontEnd;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use App\Setup\FrontEnd\FrontEnd;
+use App\Setup\FrontEndLog\FrontEndLog;
+use App\Setup\FrontendClient\FrontendClient;
 use App\Core\Utility;
 use App\Core\ReturnMessage;
 
@@ -21,6 +23,13 @@ class FrontEndRepository implements FrontEndRepositoryInterface
         $frontends = FrontEnd::all();
 
         return $frontends;
+    }
+
+    public function getFrontEndClient()
+    {
+        $frontendCleints = FrontendClient::whereNull('deleted_at')->get();
+
+        return $frontendCleints;
     }
 
     public function getFrontEndByBackendId($backendId)
@@ -42,6 +51,15 @@ class FrontEndRepository implements FrontEndRepositoryInterface
         if(isset($frontend) && count($frontend)>0){
             $frontend->status = $status;
             $frontend->save();
+
+            //Save Front End Server Log
+                $id = $frontend->id;
+                $fronted_log = new FrontEndLog();
+                $fronted_log->front_end_id = $id;
+                $fronted_log->description = "Status change !!!";
+
+                $log = Utility::addCreatedBy($fronted_log);
+                $log->save();
         }
     }
 
@@ -55,6 +73,15 @@ class FrontEndRepository implements FrontEndRepositoryInterface
 
             $tempObj = Utility::addUpdatedBy($paramObj);
             $tempObj->save();
+
+            //Save Front End Server Log
+                $id = $paramObj->id;
+                $fronted_log = new FrontEndLog();
+                $fronted_log->front_end_id = $id;
+                $fronted_log->description = "updated";
+
+                $log = Utility::addCreatedBy($fronted_log);
+                $log->save();
 
             $returnedObj['aceplusStatusCode'] = ReturnMessage::OK;
             return $returnedObj;

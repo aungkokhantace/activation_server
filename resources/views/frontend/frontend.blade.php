@@ -8,10 +8,10 @@
     <h1 class="page-header">{{isset($frontend) ?  'frontend Client Edit' : 'frontend Client Entry' }}</h1>
 
     @if(isset($frontend))
-        {!! Form::open(array('url' => 'frontend/update', 'class'=> 'form-horizontal user-form-border')) !!}
+        {!! Form::open(array('url' => 'frontend/update', 'class'=> 'form-horizontal user-form-border','id'=>'frontend_client')) !!}
 
     @else
-        {!! Form::open(array('url' => 'frontend/store', 'class'=> 'form-horizontal user-form-border')) !!}
+        {!! Form::open(array('url' => 'frontend/store', 'class'=> 'form-horizontal user-form-border','id'=>'frontend_client')) !!}
     @endif
     <input type="hidden" name="id" value="{{isset($frontend)? $frontend->id:''}}"/>
     <br/>
@@ -53,7 +53,7 @@
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
             </div>
             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-                <input type="submit" name="submit" value="{{isset($frontend)? 'UPDATE' : 'ADD'}}" class="form-control btn-primary">
+                <input type="button" value="{{isset($frontend)? 'UPDATE' : 'ADD'}}" class="form-control btn-primary" onclick="submit_confirm('frontend_client')">
             </div>
             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
                 <a class="form-control btn-primary" href="/backend/edit/{{$frontend->backend_id}}">CANCEL</a>
@@ -65,4 +65,14 @@
 @stop
 
 @section('page_script')
+<script type="text/javascript" language="javascript" class="init">
+    $(document).ready(function() {
+         $('#frontend_client').validate({
+                 submitHandler: function(form) {
+                    $('input[type="submit"]').attr('disabled','disabled');
+                    form.submit();
+            }
+        }); 
+    });
+</script>
 @stop

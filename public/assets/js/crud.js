@@ -72,6 +72,54 @@ function cancel_setup(type) {
     window.location.href = '/' + type;
 }
 
+function add_client_confirm_setup(type) {
+    swal({
+            title: "Are you sure?",
+            text: "You want to add new client",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#2a72b5 ",
+            confirmButtonText: "Confirm",
+            cancelButtonText: "Cancel",
+            closeOnConfirm: true,
+            closeOnCancel: true
+        },
+        function (isConfirm) {
+            if (isConfirm) {
+                //window.location = "/" + type + "/destroy/" + data;
+                //route path to do deletion in controller
+
+                //$("#selected_checkboxes").val(data);
+                $("#frm_" + type).submit();
+            } else {
+                return;
+            }
+        });
+}
+function submit_confirm(type) {
+    swal({
+            title: "Are you sure?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#2a72b5 ",
+            confirmButtonText: "Confirm",
+            cancelButtonText: "Cancel",
+            closeOnConfirm: true,
+            closeOnCancel: true
+        },
+        function (isConfirm) {
+            if (isConfirm) {
+                //window.location = "/" + type + "/destroy/" + data;
+                //route path to do deletion in controller
+
+                //$("#selected_checkboxes").val(data);
+                $("#" + type).submit();
+            } else {
+                return;
+            }
+        });
+}
+
 $("#check_all").click(function(event){
     if(this.checked) {
         $('.check_source').each(function() { //loop through each checkbox

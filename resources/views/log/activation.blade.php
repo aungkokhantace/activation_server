@@ -1,11 +1,11 @@
 @extends('layouts.master')
-@section('title','Backend Server Log')
+@section('title','Activation Log')
 @section('content')
 
         <!-- begin #content -->
 <div id="content" class="content">
 
-    <h1 class="page-header">Backend Server Logs</h1>
+    <h1 class="page-header">Activation Logs</h1>
 
     {!! Form::open(array('id'=> 'frm_frontend_server_log' ,'url' => 'log/frontend', 'class'=> 'form-horizontal user-form-border')) !!}
     {{ csrf_field() }}
