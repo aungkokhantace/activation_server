@@ -104,23 +104,45 @@ class ApiRepository implements ApiRepositoryInterface
                     // $tempObj->tablet_id     = $tablet_id;
                     // $tempObj->save();
 
-                    $paramObj = new FrontendClientLog();
-                    $paramObj->description = "Key is already used";
-                    $paramObj->front_end_id = $existingFrontendClient->id;
-                    $paramObj->backend_id = $backend_id;
-                    $paramObj->tablet_id = $tablet_id;
-                    $paramObj->tablet_activation_key = $tablet_activation_key;
-                    $paramObj->status = "fail";
+                    if($existingFrontendClient->tablet_id == $tablet_id && $existingFrontendClient->tablet_activation_key == $tablet_activation_key){
+                        $paramObj = new FrontendClientLog();
+                        $paramObj->front_end_id = $existingFrontendClient->id;
+                        $paramObj->backend_id = $backend_id;
+                        $paramObj->description = "activated !!!!!";
+                        $paramObj->tablet_id = $tablet_id;
+                        $paramObj->tablet_activation_key = $tablet_activation_key;
+                        $paramObj->status = "pass";
 
-                    $temp = Utility::addCreatedBy($paramObj);
-                    $temp->save();
+                        $temp = Utility::addCreatedBy($paramObj);
+                        $temp->save();
 
-                    DB::commit();
-                    $returnedObj['aceplusStatusCode'] = ReturnMessage::INTERNAL_SERVER_ERROR;
-                    $returnedObj['aceplusStatusMessage'] = "Your requested frontend client key is already used !!!";
-                    $returnedObj['backend_activation_key']  = $backend_ActivationKey->backend_activationkey;;
-                    $returnedObj['backend_url'] = "$backend_ActivationKey->website_url;";
-                    return $returnedObj;
+                        DB::commit();
+                        $returnedObj['aceplusStatusCode'] = ReturnMessage::OK;
+                        $returnedObj['aceplusStatusMessage'] = "Activated Successfully !!!";
+                        $returnedObj['backend_activation_key']  = $backend_ActivationKey->backend_activationkey;;
+                        $returnedObj['backend_url'] = "$backend_ActivationKey->website_url;";
+                        return $returnedObj;
+                    }else{
+                        $paramObj = new FrontendClientLog();
+                        $paramObj->description = "Key is already used";
+                        $paramObj->front_end_id = $existingFrontendClient->id;
+                        $paramObj->backend_id = $backend_id;
+                        $paramObj->tablet_id = $tablet_id;
+                        $paramObj->tablet_activation_key = $tablet_activation_key;
+                        $paramObj->status = "fail";
+
+                        $temp = Utility::addCreatedBy($paramObj);
+                        $temp->save();
+
+                        DB::commit();
+                        $returnedObj['aceplusStatusCode'] = ReturnMessage::INTERNAL_SERVER_ERROR;
+                        $returnedObj['aceplusStatusMessage'] = "Your requested frontend client key is already used !!!";
+                        $returnedObj['backend_activation_key']  = $backend_ActivationKey->backend_activationkey;;
+                        $returnedObj['backend_url'] = "$backend_ActivationKey->website_url;";
+                        return $returnedObj;  
+                    }
+
+                    
 
                 }
                 else {
