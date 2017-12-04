@@ -4,7 +4,7 @@
     <title>Log In</title>
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/css/login.css" rel="stylesheet">
-
+    <script src="/assets/plugins/jquery/jquery-1.9.1.min.js"></script>
 
 </head>
 <body>
@@ -21,7 +21,7 @@
                      First Log In
                 </div>
                 <!-- Starting Form -->
-                {!! Form::open(array('url' => 'first_login'))!!}
+                {!! Form::open(array('url' => 'backend_mps/first_login','id'=>'first_login'))!!}
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         @if ($errors->has())
                             <p class="alert alert-danger">
@@ -75,5 +75,25 @@
         </div>
     </div>
 </div>
+<script src="/assets/js/validation/jquery.validate.js"></script>
+<script src="/assets/js/validation/additional-methods.js"></script>
+<script>
+ //Start Validation for Entry and Edit Form
+            $('#first_login').validate({
+                rules: {
+                    user_name          : 'required',
+                    password          : 'required'
+                },
+                messages: {
+                    name          : 'Please Type User Name!',
+                    password      : 'Forgot to type password'
+                },
+                submitHandler: function(form) {
+                    $('input[type="submit"]').attr('disabled','disabled');
+                    form.submit();
+                }
+            });
+            //End Validation for Entry and Edit Form   
+</script>
 </body>
 </html>
