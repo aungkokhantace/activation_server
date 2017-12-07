@@ -7,7 +7,7 @@
 
     <h1 class="page-header">Frontend Client Logs</h1>
 
-    {!! Form::open(array('id'=> 'frm_frontend_server_log' ,'url' => 'log/frontend', 'class'=> 'form-horizontal user-form-border')) !!}
+    {!! Form::open(array('id'=> 'frm_frontend_server_log' ,'url' => 'log/frontend/detail', 'class'=> 'form-horizontal user-form-border')) !!}
     {{ csrf_field() }}
     <input type="hidden" id="selected_checkboxes" name="selected_checkboxes" value="">
 
@@ -19,30 +19,21 @@
 
                     <thead>
                     <tr>
-                        <th>WebSite URL</th>
                         <th>Frontend Activation Key</th>
-                        <th>Total Access Count</th>
-                        <th>Status</th>
-                        <th>Description</th>
+                        <th>Tablet ID</th>
                     </tr>
                     </thead>
                     <tfoot>
                     <tr>
-                        <th class="search-col" con-id="website_url">WebSite URL</th>
                         <th class="search-col" con-id="activation_key">Front Activation Key</th>
-                        <th class="search-col" con-id="access_total_count">Total Access Count</th>
-                        <th class="search-col" con-id="status">Status</th>
-                        <th class="search-col" con-id="description">Description</th>
+                        <th class="search-col" con-id="tablet_id">Tablet ID</th>
                     </tr>
                     </tfoot>
                     <tbody>
                     @foreach($frontends as $frontend)
                         <tr>
-                            <td>{{$frontend->website_url}}</td>
-                            <td>{{$frontend->activation_key}}</td>
-                            <td><a href="/log/frontend/detail/{{$frontend->id}}">{{$frontend->access_total_count}}</a></td>
-                            <td>{{$frontend->status}}</td>
-                            <td>{{$frontend->description}}</td>
+                            <td>{{$frontend->tablet_activation_key}}</td>
+                            <td>{{$frontend->tablet_id}}</td>
                         </tr>
                     @endforeach
                     </tbody>

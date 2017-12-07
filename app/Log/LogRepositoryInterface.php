@@ -17,5 +17,6 @@ interface LogRepositoryInterface
     public function getFrontendActiveCountByServer($backendId);
     public function getFrontendInActiveCountByServer($backendId);
     public function getFrontendAccessCount($frontendId);
+    public function getFrontendAccessData($frontendId);
     public function getActivatingLog();
 }
