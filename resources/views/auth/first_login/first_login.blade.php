@@ -21,7 +21,7 @@
                      First Log In
                 </div>
                 <!-- Starting Form -->
-                {!! Form::open(array('url' => 'backend_mps/first_login','id'=>'first_login'))!!}
+                {!! Form::open(array('url' => 'first_login','id'=>'first_login'))!!}
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         @if ($errors->has())
                             <p class="alert alert-danger">

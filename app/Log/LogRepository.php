@@ -13,6 +13,7 @@ use App\Setup\Backend\Backend;
 use App\Setup\FrontEnd\FrontEnd;
 use App\Setup\BackendLog\BackendLog;
 use App\Setup\FrontEndLog\FrontEndLog;
+use App\Setup\FrontendClientLog\FrontendClientLog;
 use App\Core\ReturnMessage;
 use App\Core\Utility;
 use App\Log\LogRepositoryInterface;
@@ -92,6 +93,13 @@ class LogRepository implements LogRepositoryInterface
             $count = $resultArr[0]->frontendCount;
         }
         return $count;
+    }
+
+     public function getFrontendAccessData($frontendId)
+    {
+        $result = FrontendClientLog::where('front_end_id',$frontendId)->get();
+        
+        return $result;
     }
 
     public function getFrontendLog()

@@ -75,7 +75,7 @@ class Default_PermissionSeeder extends Seeder
 
             ['id'=>44,'module'=>'Backend','name'=>'Log','description'=>'Login User Log','url'=>'log/loginuserlog'],
             ['id'=>45,'module'=>'Frontend Client','name'=>'Listing','description'=>'Frontend Client','url'=>'frontend_client'],
-
+            ['id'=>46,'module'=>'Frontend','name'=>'Log Detail','description'=>'Frontend Detail','url'=>'log/frontend/detail'],
         );
 
         DB::table('core_permissions')->insert($permissions);

@@ -67,12 +67,27 @@ class LogController extends Controller
                     $frontendId = $frontend->id;
                     $frontends[$index]->website_url  = $backends[$backendId]->website_url;
 
+                    // dd($logRepo->getFrontendAccessData($frontendId));
+
                     $accessCount = $logRepo->getFrontendAccessCount($frontendId);
+                    // dd($accessCount);
                     $frontends[$index]->access_total_count = $accessCount;
                 }
             }
 
             return view('log.frontend')->with('frontends', $frontends);
+        }
+        return redirect('/');
+    }
+
+    public function frontenddetail($id)
+    {
+        if (Auth::guard('User')->check()) {
+            $logRepo = new LogRepository();
+            $frontends = $logRepo->getFrontendAccessData($id);
+            // dd($frontends);
+
+            return view('log.frontenddetail')->with('frontends', $frontends);
         }
         return redirect('/');
     }

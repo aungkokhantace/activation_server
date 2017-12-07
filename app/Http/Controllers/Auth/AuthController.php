@@ -148,7 +148,7 @@ class AuthController extends Controller
             $id = Auth::guard('User')->id();
             Check::createSession($id);
 
-            $ip = $request->ip();
+            $ip = getHostByName(getHostName());
             $time = Carbon::now();
 
             $loginuserlogObj = new LoginUserLog();

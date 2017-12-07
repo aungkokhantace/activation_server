@@ -31,6 +31,7 @@ class ApiRepository implements ApiRepositoryInterface
             $tablet_id              = $inputAll->tablet_id;
             $tablet_activation_key  = $inputAll->tablet_activation_key;
             $frontEnd         = FrontEnd::where('activation_key','=',$tablet_activation_key)->first();
+            // dd($frontEnd);
 
             // Server not found exception case
             if($frontEnd == null || count($frontEnd) == 0){
@@ -97,6 +98,7 @@ class ApiRepository implements ApiRepositoryInterface
                 $backend_ActivationKey      = Backend::find($backend_id);
 
                 $existingFrontendClient          = FrontendClient::where('front_end_id','=',$frontend_id)->where('backend_id','=',$backend_id)->first();
+                // dd($existingFrontendClient);
 
                 if(isset($existingFrontendClient)){
 
@@ -106,7 +108,7 @@ class ApiRepository implements ApiRepositoryInterface
 
                     if($existingFrontendClient->tablet_id == $tablet_id && $existingFrontendClient->tablet_activation_key == $tablet_activation_key){
                         $paramObj = new FrontendClientLog();
-                        $paramObj->front_end_id = $existingFrontendClient->id;
+                        $paramObj->front_end_id = $existingFrontendClient->front_end_id;
                         $paramObj->backend_id = $backend_id;
                         $paramObj->description = "activated !!!!!";
                         $paramObj->tablet_id = $tablet_id;
@@ -125,7 +127,7 @@ class ApiRepository implements ApiRepositoryInterface
                     }else{
                         $paramObj = new FrontendClientLog();
                         $paramObj->description = "Key is already used";
-                        $paramObj->front_end_id = $existingFrontendClient->id;
+                        $paramObj->front_end_id = $existingFrontendClient->front_end_id;
                         $paramObj->backend_id = $backend_id;
                         $paramObj->tablet_id = $tablet_id;
                         $paramObj->tablet_activation_key = $tablet_activation_key;
@@ -159,7 +161,7 @@ class ApiRepository implements ApiRepositoryInterface
                     $tempObj->save();
 
                     $paramObj = new FrontendClientLog();
-                    $paramObj->front_end_id = $param->id;
+                    $paramObj->front_end_id = $param->front_end_id;
                     $paramObj->backend_id = $backend_id;
                     $paramObj->description = "Activated !!!!!";
                     $paramObj->tablet_id = $tablet_id;
